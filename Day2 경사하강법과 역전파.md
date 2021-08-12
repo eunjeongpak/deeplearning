@@ -7,85 +7,85 @@
     - **오차**가 작아지도록 모델의 **가중치를 조정** -> 이 과정을 반복하는 것이 신경망의 학습 
 
     - 오차
-      $$
-      (예측값-정답)^2
-      $$
-
+      
+      ​			![image-20210812174819014](https://user-images.githubusercontent.com/76864400/129167854-1a4fdf40-365d-4e7b-b69a-7aea392fb2a6.png)
+      
+      
+      
     - 모든 학습 데이터의 오차를 더하면 **오차 함수** 구할 수 있음
-
+    
       ![image-20210812145739068](https://user-images.githubusercontent.com/76864400/129166808-c844d1fd-89d1-4a23-9546-bd555ff3534e.png)
-
+    
       -> 이차 함수로 나타나는데, 접선의 기울기가 0이면 오차가 가장 최소가 됨
-
+    
     - **신경망 학습 알고리즘** 요약
-
+    
       1. 학습할 **신경망 구조**를 선택
-
+    
          - 입력층 유닛의 수 = 특징 수
          - 출력층 유닛의 수 = 타겟 클래스 수
          - 은닉층 수(각 은닉층의 노드 수)
-
+    
       2. **가중치 랜덤 초기화**
-
+    
       3. **순전파(forward propagation)**를 통해 (출력층 y값) 을 모든 입력에 대해 계산
-
+    
       4. 이를 통해 나온 예측값과 실제값의 오차, **비용함수(손실함수)**를 계산
-
+    
       5. **역방향** 전파를 통해 **편미분 값**들을 계산
-
+    
       6. **경사하강법** (or 다른 최적화 알고리즘)을 **역전파**와 함께 사용하여 **비용함수 최소화**
-
+    
       7. 어떤 중지 기준을 충족하거나 비용함수를 최소화 할 때까지 단계 2~5를 반복 
-
+    
          → 2 ~ 5를 한 번 진행하는 것을 **epoch** 또는 **iteration**이라 함
-
+    
          참고: 
-
+    
          - **epoch** 전체 데이터 세트를 한 번 돌린 것
-
+    
          - **iteration**은 batch size 만큼 돌아가는 횟수를 말하는 용어
-
+    
            ex) image = 1000개, batch size = 25, epoch=100이라면,
-
+    
            -> 100 epoch의 결과는 1000 x 100 = 100,000 이미지 학습
-
+    
            -> 이는 100,000/25=4000 iteration을 의미
-
   
-
   
-
+  
+  
+  
   - **경사하강법**
-
+  
     - **오차의 최소값**을 한 번에 찾지 않고 현재 **가중치 w의 위치에서 오차가 작아지는 방향**으로 조금씩 이동하면서 **가중치 수정**
-
+  
     - 손실값에 대한 **미분값**을 사용해 **최저의 손실값**을 가지는 **가중치**를 찾는 방법
-
+  
     - **오차함수를 미분한 기울기**만큼 가중치를 변경하는데, 학습률인 **a로 이동 속도 조절**
-
+  
       ![image-20210812145808331](https://user-images.githubusercontent.com/76864400/129166812-6bb4b50b-6c29-4111-a116-0569ff4f456f.png)
-
+  
       -> 이 과정을 계속 반복하면 오차의 최솟값에 근접
-
+  
     - 가중치 업데이트
-      $$
-      w_{(t+1)}=w_{t}-Learning rate*\dfrac {\partial Error}{\partial w_{t}}
-      $$
-
-    - 확률적 경사하강법(Stochastic Gradient Descent, SGD)
-
-      - 기존에 사용한 경사하강법은 batch 방법인데, 이는 모든 관측치 가지고 기울기를 다 계산한 후 가중치 업데이트
+      
+      ![image-20210812174836994](https://user-images.githubusercontent.com/76864400/129167859-b89e370f-4aed-4f14-ae0e-4c161dd93944.png)
+      
+  - 확률적 경사하강법(Stochastic Gradient Descent, SGD)
+    
+    - 기존에 사용한 경사하강법은 batch 방법인데, 이는 모든 관측치 가지고 기울기를 다 계산한 후 가중치 업데이트
       - **SGD란 무작위로 뽑은 하나의 관측값마다 기울기를 계산**하고 바로 가중치 업데이트
       - 장점: SGD는 관측치마다 가중치를 업데이트하기 때문에 학습이 빠르게 진행되고, 데이터 샘플이 많아질수록 빠르게 학습됨
       - 단점: 학습 과정 중 **손실함수 값이 변동이 심하다**는 단점이 있는데, **배치방법과 SGD를 합친 Mini-batch 경사하강법**을 사용할 수도 있음
-
-    - 경사하강법 알고리즘
-
-      1) Stochastic Gradient Descent(SGD)
-
-      2) SGD의 변형된 알고리즘(Momentum, RMSProp, Adam 등)
-
-      3) Newton's method 등 2차최적화 알고리즘 기반 방법들(BFGS 등)
+    
+  - 경사하강법 알고리즘
+    
+    1) Stochastic Gradient Descent(SGD)
+    
+    2) SGD의 변형된 알고리즘(Momentum, RMSProp, Adam 등)
+    
+    3) Newton's method 등 2차최적화 알고리즘 기반 방법들(BFGS 등)
 
   
 
@@ -104,23 +104,10 @@
     
 
   - **미분**
-
-![image-20210811145703610](https://user-images.githubusercontent.com/76864400/129166820-f23db8a2-992c-43f0-96e7-c84be6612cfc.png)
-$$
-Error=\dfrac{1}{2}(t_{1}-Y_{1})^2 + \dfrac{1}{2}(t_{2}-Y_{2})^2  \\
-$$
-
-$$
-\dfrac {\partial Error}{\partial W_{21}}=\dfrac {\partial Error}{\partial Y_{1}} * \dfrac {\partial Y_{1}}{\partial y_{1}} * \dfrac {\partial y_{1}}{\partial W_{21}} \\
-\\
-(1)\dfrac {\partial Error}{\partial Y_{1}} = - (t_{1} - Y_{1}) \\
-\\
-(2)\dfrac {\partial Y_{1}}{\partial y_{1}} = Y_{1}(1-Y_{1}) \\
-Y_{1}=f(y_{1}) ((f(x)=sigmoid(x)) \\ 
-sigmoid'=sigmoid(x)(1-sigmoid(x)) \\
-\\
-(3) \dfrac {\partial y_{1}}{\partial W_{21}}=H_{1} \\ y_{1}=H_{1}*w_{21}+H_{2}*w_{23}+H_{3}*w_{25}
-$$
+  
+    ![image-20210811145703610](https://user-images.githubusercontent.com/76864400/129166820-f23db8a2-992c-43f0-96e7-c84be6612cfc.png)
+  
+    ![image-20210812174903618](https://user-images.githubusercontent.com/76864400/129167861-181e01d9-3b1e-4fe9-803f-abca95d1fc47.png)
 
 
 
